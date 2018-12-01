@@ -10,7 +10,8 @@
 
 #loop unless user select "q"/"Q".
 while true; do
-	# show menu and input user's  selection
+	# clear screen & `show menu and input user's  selection
+	clear
 	echo "A) Create a user account"  
 	echo "B) Delete a user account"  
 	echo "C) Change supplemenrary group for a user account"  
