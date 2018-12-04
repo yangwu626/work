@@ -70,7 +70,7 @@ public class CalculatorGUI extends JFrame implements ActionListener {
 		{
 			JPanel panel = new JPanel();
 			panel.setLayout(new GridLayout(1, 5));
-			String []ops = { "+", "-", "*", "/", "%c", "=" };
+			String []ops = { "+", "-", "*", "/", ".", "%c", "=" };
 			for(int i=0; i< ops.length; i++) {
 				JButton b = new JButton(ops[i]);
 				b.addActionListener(this);
@@ -131,6 +131,7 @@ public class CalculatorGUI extends JFrame implements ActionListener {
 		case "7":
 		case "8":
 		case "9":
+		case ".":	
 			// handle 0 ~ 9
 			// update current num & update display
 			this.num[this.curNum] += txt;
