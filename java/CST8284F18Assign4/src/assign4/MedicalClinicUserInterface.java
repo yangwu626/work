@@ -6,7 +6,9 @@
  * Date: 18/10/2018
  */
 
-package assign3;
+package assign4;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.util.*;
 import java.text.SimpleDateFormat;
@@ -17,7 +19,9 @@ public class MedicalClinicUserInterface {
 	private static final int ADD_APPOINTMENT = 2;
 	private static final int CANCEL_APPOINTMENT = 3;
 	private static final int LIST_APPOINTMENT = 4;
-	private static final int QUIT = 5;
+	private static final int WRITE_PATIENT_DATA = 5;
+	private static final int LOAD_PATIENT_DATA = 6;
+	private static final int QUIT = 7;
 
 	private MedicalClinic clinic;
 	private Scanner in;
@@ -41,7 +45,9 @@ public class MedicalClinicUserInterface {
 				"2 Make an appointment for a patient\n"+
 				"3 Cancel an appointment for a patient\n"+
 				"4 List all appointments\n"+
-				"5 Quit");
+				"5 Write Patient data to file\n"+
+				"6 Load Patient data\n"+
+				"7 Quit");
 			try {
 				switch (in.nextInt()) {
 				case MedicalClinicUserInterface.ADD_PATIENT:
@@ -54,6 +60,12 @@ public class MedicalClinicUserInterface {
 					cancelAppointment();
 				case MedicalClinicUserInterface.LIST_APPOINTMENT:
 					listAppointments();
+					break;
+				case MedicalClinicUserInterface.WRITE_PATIENT_DATA:
+					writePatientsOut();
+					break;
+				case MedicalClinicUserInterface.LOAD_PATIENT_DATA:	
+					readPatientsIn();
 					break;
 				case MedicalClinicUserInterface.QUIT:
 					quit=true;
@@ -328,6 +340,15 @@ public class MedicalClinicUserInterface {
 			System.out.println( "Patient [" + p.toString() + "]");
 		}
 		System.out.println("");
+	}
+	// serialize Patient data
+	public void writePatientsOut() {
+		clinic.filePatientsOut();
+	}
+	
+	// de-serialize Patient data
+	public void readPatientsIn() { 
+		clinic.filePatientsIn();
 	}
 	
 }

@@ -4,10 +4,16 @@
  * Student Name: Yang Wu
  * Date: 18/10/2018
  */
-package assign3;
+package assign4;
+
+import java.io.Serializable;
 
 // Create Doctor class.
-public class Doctor {
+public class Doctor implements Serializable {
+	/**
+	 * first version
+	 */
+	private static final long serialVersionUID = 1L;
 	//declare Doctor class fields: firstName:String, lastName:String, specialty:String.
 	private String firstName;
 	private String lastName;

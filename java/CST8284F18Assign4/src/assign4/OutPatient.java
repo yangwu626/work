@@ -4,10 +4,16 @@
  * Student Name: Yang Wu
  * Date: 18/10/2018
  */
-package assign3;
+package assign4;
+import java.io.Serializable;
 import java.util.Objects;
 // create Patient's subclass: OutPatient
-public class OutPatient extends Patient{
+public class OutPatient extends Patient implements Serializable{
+
+	/**
+	 * first version
+	 */
+	private static final long serialVersionUID = 1L;
 
 	// declare private class fields;
 	private double distanceFromClinic;

@@ -1,4 +1,4 @@
-package assign3;
+package assign4;
 
 public class MedicalClinicException extends RuntimeException {
 	public MedicalClinicException() {

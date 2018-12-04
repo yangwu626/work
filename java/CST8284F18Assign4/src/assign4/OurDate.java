@@ -4,11 +4,17 @@
  * Student Name: Yang Wu
  * Date: 18/10/2018
  */
-package assign3;
+package assign4;
+import java.io.Serializable;
 import java.util.Calendar;
 
 //OurDate class use calendar for calendar date expression and converted.
-public class OurDate {
+public class OurDate implements Serializable{
+
+	/**
+	 * first version
+	 */
+	private static final long serialVersionUID = 1L;
 
 	//declaration class fields: CALENDER,day,month and year.
 	private final static Calendar CALENDER = Calendar.getInstance();

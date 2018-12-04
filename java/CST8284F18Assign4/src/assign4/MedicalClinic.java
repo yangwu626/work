@@ -4,13 +4,22 @@
  * Student Name: Yang Wu
  * Date: 18/10/2018
  */
-package assign3;
-import java.text.ParseException;
+package assign4;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.*;
-import java.text.SimpleDateFormat;
 
 // MedicalClinic class.
-public class MedicalClinic {
+public class MedicalClinic implements Serializable{
+	/**
+	 * first version
+	 */
+	private static final long serialVersionUID = 1L;
 	// predefined max values.  
 	static final int MAXAPPOINTMENTS =5;
 	static final int MAXPATIENTS = 5;
@@ -54,7 +63,7 @@ public class MedicalClinic {
 			return ;
 		
 		// skip adding if the patient already exist based on health card #
-		for(int i=0; i<patients.size(); i++) {
+		for(int i=0; i<patients.size(); i++){
 			if (patients.get(i).getHealthCardNumber().equals(healthCardNumber))
 				return ;
 		}
@@ -169,5 +178,58 @@ public class MedicalClinic {
 	public ArrayList<Appointment> getAppointments() {
 		return appointments;
 	}
+	
+	// Serialize Patient data  
+	public void filePatientsOut() {
+    	try
+        {    
+            //Saving of object in a file 
+            FileOutputStream file = new FileOutputStream("PatientData.ser"); 
+            ObjectOutputStream out = new ObjectOutputStream(file); 
+              
+            // write serialization data of Patient objects 
+            out.writeObject(this.patients); 
+              
+            out.close(); 
+            file.close(); 
+              
+            System.out.println("Patients data has been serialized"); 
+        } 
+        catch(IOException ex) 
+        { 
+        	ex.printStackTrace();
+            System.out.println("IOException is caught"); 
+        } 
+	}
 
+	// Deserialize Patient data
+	public void filePatientsIn() {
+	    try
+        {    
+	    	// open file & load object from stream
+	    	FileInputStream file = new FileInputStream("PatientData.ser"); 
+            ObjectInputStream in = new ObjectInputStream(file); 
+              
+            // Reading Patients from a file 
+            this.patients = (ArrayList<Patient>)in.readObject(); 
+              
+            // close file & object parser
+            in.close(); 
+            file.close(); 
+              
+            System.out.println("Patients data has been deserialized "); 
+        } 
+        // catch io exceptions, for example, if there is no file PatientData.ser    
+        catch(IOException ex) 
+        { 
+            System.out.println("Failed to open file PatientData.ser"); 
+        	ex.printStackTrace();
+        } 
+        // catch exceptions in parsing Object data  
+        catch(ClassNotFoundException ex) 
+        { 
+            System.out.println("File PatientData.ser contains invalid data"); 
+        	ex.printStackTrace();
+        } 		
+	}
 }
