@@ -1,0 +1,11 @@
+1.Home
+http://localhost:8080/yang/Week11Lab_YangWu/index.php
+
+2.menu
+http://localhost:8080/yang/Week11Lab_YangWu/menu.php
+
+3.contact
+http://localhost:8080/yang/Week11Lab_YangWu/contact.php
+
+4.mailing_list
+http://localhost:8080/yang/Week11Lab_YangWu/mailing_list.php
