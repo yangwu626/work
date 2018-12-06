@@ -21,18 +21,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+//Create calculator GUI implementation.
 public class CalculatorGUI extends JFrame implements ActionListener {
 
 	//DECLARE FIELDS SUCH AS BUTTONS AND PANELS
-	private JLabel display;
-	private String []num;
-	private String op;
-	private int curNum;
-	private String curOp;
+	private JLabel display; // used to display result
+	private String []num;   // input number
+	private String curOp;	// input operator
+	private int curNum;     //current numbers input
 	
 	public CalculatorGUI()  {
 		super("CST8284_F18_GUI");
-		
+		// init states
 		num = new String [2];
 		num[0] = "";
 		num[1] = "";
@@ -70,7 +70,7 @@ public class CalculatorGUI extends JFrame implements ActionListener {
 		{
 			JPanel panel = new JPanel();
 			panel.setLayout(new GridLayout(1, 5));
-			String []ops = { "+", "-", "*", "/", "%c", "=" };
+			String []ops = { "+", "-", "*", "/", "%", "c", "=" };
 			for(int i=0; i< ops.length; i++) {
 				JButton b = new JButton(ops[i]);
 				b.addActionListener(this);
@@ -112,9 +112,10 @@ public class CalculatorGUI extends JFrame implements ActionListener {
 		//START ASSEMBLING THE GUI:
 		//PUT "WIDGETS BUTTONS OR TEXTFIELDS ON THE PANELS
 		//PUT THE PANELS ON THE FRAME
-		curNum = 0;
 		
 	}//END MAIN METHOD	
+	
+	//action event handler
 	public void actionPerformed(ActionEvent e) {
 		// convert source to button object
 		JButton b = (JButton)e.getSource();
@@ -139,6 +140,7 @@ public class CalculatorGUI extends JFrame implements ActionListener {
 		case "-":
 		case "*":
 		case "/":
+		case "%":	
 			if (++curNum == 2) {
 				// if we already get two nums, then we need to calculate first,
 				// then assign result to num[0], clear num[1] and set current num count to 1.
@@ -149,7 +151,7 @@ public class CalculatorGUI extends JFrame implements ActionListener {
 			// update current operator
 			this.curOp = txt;
 			break;
-		case "%c":
+		case "c":
 			// reset num[0] to 0 and clear all other data.
 			num[0] = "0";
 			num[1] = "";
@@ -193,6 +195,10 @@ public class CalculatorGUI extends JFrame implements ActionListener {
 		case "/":
 			res /= n;
 			break;
+		case "%":
+			res %= n;
+			break;
+				
 		default:
 			break;
 		}
