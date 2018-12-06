@@ -42,19 +42,6 @@
 			//We only want the code that adds an employee to 
 			//the database to run if the form has been submitted.
 			// upload file
-			if(isset($_FILES['file'])){
-				$file_name = $_FILES['file']['name'];
-				$file_tmp = $_FILES['file']['tmp_name'];
-
-				if (move_uploaded_file($file_tmp,"files/".$file_name)){
-				   echo "<h3> File upload Success </h3>";
-				}else{
-					echo "<h3>File upload failed </h3>";
-				}
-			 } else {
-				 echo "<h3> File not set </h3>";
-			 }
-
 			if( isset($_POST['customerName']) ||
 				isset($_POST['phoneNumber'])  || 
 				isset($_POST['emailAddress']) ||
@@ -94,7 +81,19 @@
 					$addSuccess = $customerDAO->addCustomer($customer);
 					echo '<h3>' . $addSuccess . '</h3>';
 
-					
+					// upload file if user selected a file 
+					if(isset($_FILES['file'])){
+						$file_name = $_FILES['file']['name'];
+						$file_tmp = $_FILES['file']['tmp_name'];
+		
+						if (move_uploaded_file($file_tmp,"files/".$file_name)){
+						   echo "<h3> File upload Success </h3>";
+						}else{
+							echo "<h3>File upload failed </h3>";
+						}
+					 } else {
+						 echo "<h3> File not set </h3>";
+					 }
 				}
 			}
 		}  
