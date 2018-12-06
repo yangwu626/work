@@ -1,12 +1,14 @@
 <?php
     require_once('WebsiteUser.php');
     session_start();
-    if(isset($_SESSION['websiteUser'])){
-        if($_SESSION['websiteUser']->isAuthenticated()){
-            session_write_close();
-            header('Location:restricted.php');
-        }
-    }
+    // if(isset($_SESSION['websiteUser'])){
+    //     if($_SESSION['websiteUser']->isAuthenticated()){
+    //         //session_write_close();
+    //         $_SESSION['Lastlogin'] = $websiteUser->getLastlogin();
+    //         header("Location: ". $_SESSION['current_page']);
+    //         exit();
+    //     }
+    // }
     $missingFields = false;
     if(isset($_POST['submit'])){
         if(isset($_POST['username']) && isset($_POST['password'])){
@@ -20,8 +22,11 @@
                     $password = $_POST['password'];
                     $websiteUser->authenticate($username, $password);
                     if($websiteUser->isAuthenticated()){
-                        $_SESSION['websiteUser'] = $websiteUser;
-                        header('Location:restricted.php');
+                        $_SESSION['websiteUser'] = $websiteUser;  
+                        $_SESSION['Lastlogin'] = $websiteUser->getLastlogin();
+                        $_SESSION['AdminID'] = $websiteUser->getAdminID();
+                        header("Location: ". $_SESSION['current_page']);
+                        exit();
                     }
                 }
             }

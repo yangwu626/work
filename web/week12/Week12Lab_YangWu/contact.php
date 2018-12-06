@@ -39,6 +39,20 @@
 			//They will only be set when the form is submitted.
 			//We only want the code that adds an employee to 
 			//the database to run if the form has been submitted.
+			// upload file
+			if(isset($_FILES['file'])){
+				$file_name = $_FILES['file']['name'];
+				$file_tmp = $_FILES['file']['tmp_name'];
+
+				if (move_uploaded_file($file_tmp,"files/".$file_name)){
+				   echo "File upload Success";
+				}else{
+					echo "File upload failed";
+				}
+			 } else {
+				 echo "File not set";
+			 }
+
 			if( isset($_POST['customerName']) ||
 				isset($_POST['phoneNumber'])  || 
 				isset($_POST['emailAddress']) ||
@@ -77,6 +91,8 @@
 											 $_POST['emailAddress'], $_POST['referral']);
 					$addSuccess = $customerDAO->addCustomer($customer);
 					echo '<h3>' . $addSuccess . '</h3>';
+
+					
 				}
 			}
 		}  
@@ -136,13 +152,13 @@
 		?>
     <tr>
 		<td colspan='2'>
+			<input type='file' name='file' id='file' value='Choose file!'>&nbsp;&nbsp;
 			<input type='submit' name='btnSubmit' id='btnSubmit' value='Sign up!'>&nbsp;&nbsp;
 			<input type='reset' name="btnReset" id="btnReset" value="Reset Form">
 		</td>
     </tr>
     </table>
     </form>
-	<a href="mailing_list.php">List all the customers</a>
 
     </div><!-- End Main -->
     </div><!-- End Content -->

@@ -4,14 +4,16 @@ class WebsiteUser{
     /* Host address for the database */
     protected static $DB_HOST = "127.0.0.1";
     /* Database username */
-    protected static $DB_USERNAME = "cst8285";
+    protected static $DB_USERNAME = "wp_eatery";
     /* Database password */
     protected static $DB_PASSWORD = "password";
     /* Name of database */
-    protected static $DB_DATABASE = "cst8285";
+    protected static $DB_DATABASE = "wp_eatery";
     
     private $username;
     private $password;
+    private $lastlogin;
+    private $adminID;
     private $mysqli;
     private $dbError;
     private $authenticated = false;
@@ -26,7 +28,7 @@ class WebsiteUser{
         }
     }
     public function authenticate($username, $password){
-        $loginQuery = "SELECT * FROM users WHERE username = ? AND password = ?";
+        $loginQuery = "SELECT * FROM adminusers WHERE Username = ? AND Password = ?";
         $stmt = $this->mysqli->prepare($loginQuery);
         $stmt->bind_param('ss', $username, $password);
         $stmt->execute();
@@ -35,9 +37,21 @@ class WebsiteUser{
             $this->username = $username;
             $this->password = $password;
             $this->authenticated = true;
+            $row = $result->fetch_assoc();
+            $this->lastlogin = $row["Lastlogin"];
+            $this->adminID = $row["AdminID"];
+            $stmt->free_result();
+
+            // now update lastlogin 
+            $curdate = date("Y-m-d");
+            $updatequery = "UPDATE adminusers SET Lastlogin = ? WHERE AdminID = ?";
+            $stmt = $this->mysqli->prepare($updatequery);
+            $stmt->bind_param('ss', $curdate, $this->adminID);
+            $stmt->execute();
         }
         $stmt->free_result();
     }
+
     public function isAuthenticated(){
         return $this->authenticated;
     }
@@ -46,6 +60,12 @@ class WebsiteUser{
     }
     public function getUsername(){
         return $this->username;
+    }
+    public function getLastlogin(){
+        return $this->lastlogin;
+    }
+    public function getAdminID() {
+        return $this->adminID;
     }
 }
 ?>
