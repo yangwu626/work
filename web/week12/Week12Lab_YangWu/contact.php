@@ -26,6 +26,8 @@
 			return preg_match("/^[0-9]{3}-?[0-9]{3}-?[0-9]{4}$/", $phone) ? TRUE : FALSE;
 		}
 
+		// Check if the form was submitted 
+		if ($_SERVER["REQUEST_METHOD"] == "POST") { 
 		//sumit acction
 		try{
 			//connect database.
@@ -45,12 +47,12 @@
 				$file_tmp = $_FILES['file']['tmp_name'];
 
 				if (move_uploaded_file($file_tmp,"files/".$file_name)){
-				   echo "File upload Success";
+				   echo "<h3> File upload Success </h3>";
 				}else{
-					echo "File upload failed";
+					echo "<h3>File upload failed </h3>";
 				}
 			 } else {
-				 echo "File not set";
+				 echo "<h3> File not set </h3>";
 			 }
 
 			if( isset($_POST['customerName']) ||
@@ -101,9 +103,11 @@
             //an error message will be displayed to the user.
             echo '<h3>Error on page.</h3>';
             echo '<p>' . $e->getMessage() . '</p>';            
-        }
+		}
+	}
 	?>
-    <form name="frmNewsletter" id="frmNewsletter" method="post" action="contact.php">
+    <form name="frmNewsletter" id="frmNewsletter" method="post" 
+		enctype="multipart/form-data" action="contact.php">
 	<table>
     <tr>	 
     <td>Name:</td>
