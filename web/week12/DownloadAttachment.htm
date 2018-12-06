@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0096)https://brightspace.algonquincollege.com/d2l/le/dropbox/92446/91883/DownloadAttachment?fid=70158 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body>
+
+
+		
+		
+	
+	
+		<h1>Week 12 (Final) Lab - CST8285</h1>
+		<h2>Objective</h2>
+		<p>This week, we will continue with the website for our fictional company - the WP eatery.
+		In last week's lab we submitted contact information to our mailing list table in our wp_eatery database and created a new mailing_list.php script that selects the contact information from our database and displays it.
+		This final lab, builds on last weeks by securing the mailing_list.php script using session management. It also builds onto our contact us form ensuring we secure/cleanse the form data coming from our contact us form and uploading a file:</p>
+		<ul>
+			<li>Create a new adminusers table within our existing wp_eatery database</li>
+			<li>Secure the mailing_list.php script using session management by ensuring that only administrators that have logged into the site can view this information</li>
+			<li>Secure the INSERT portion of your contact code preventing any SQL insertion.</li>
+			<li>Add upload file to the contact us form and ensuring the user selected file gets uploaded to the server.</li>
+		</ul>
+		<h2>Instructions</h2>
+		<h3>Step 1 - Complete Week 11 Lab</h3>
+		<p>This lab builds off of the Week 11 lab. Ensure that you have this completed or you will not be able to continue!!</p>
+		<h3>Step 2 - Create an adminusers table and an Admin User</h3>
+        <p>Using phpMyAdmin (or the MySQL workbench, or the command line) research the MySql statement CREATE to create a new table in your wp_eatery database.<strong>Very Important</strong> - your table name and column names MUST match exactly or this lab cannot be marked!
+        </p><p>The new table name is <strong>adminusers</strong></p>
+        <p>Table columns names / details</p>
+        <ul>
+           <li>AdminID INT / NOT NULL / PRIMARY KEY / AUTO_INCREMENT)</li>
+           <li>Username VARCHAR(50)</li>
+           <li>Password VARCHAR(50)</li>
+           <li>Lastlogin DATE</li>
+        </ul>
+		<p>Again (using phpMyAdmin or the MySQL workbench, or the command line) INSERT a new user into the Adminusers table. <strong>Very Important</strong> the username/password you create MUST match the following or again your lab WILL NOT be marked.</p>
+        <p>Adminusers</p>
+        <ul>
+           <li>Username = admin</li>
+           <li>Password = passme</li>
+        </ul>
+		<h3>Step 3 - Secure the mailing_list.php script</h3>
+		<ul>
+		   <li>This script, created in last week's lab, should only be accessible by admin users only USING session varible AdminID. The value of the session AdminID variable should be the primary key of the admin user's record from the adminusers table.</li>
+		   <li>Add a link to the navigation called "List" and link it to the mailing_list.php page.</li>
+		   <li>When a user trys to access this script and is not logged in (meaning their session variable AdminID is not set) the user should be redirected a new login page called userlogin.php</li>
+		      <ul>
+  		         <li>The new userlogin.php page should present the user with a login form where they will enter their username and password. First the script must validate that the username and password values were passed. If either field is missing the a message is displayed to the user letting them know which field is missing and allows them to attempt to login again.</li>
+		         <li>The login script will also validate the username / password supplied against the new adminusers table.</li>
+		         <li>If the username/password (admin/passme) validates the session variable AdminID is set and the user is redirected to the mailing_list.php script.</li>
+		         <li>In addition the date/time the user logged in is to be inserted into the Lastlogin column of the adminusers table.</li>
+		         <li>If the user supplies the incorrect username/password they will be presented with a message letting them know their username and password did not authenticate.</li>
+		      </ul>
+		   <li>Once the user is validated the session variable AdminId should be set and the will be allowed to access the mailing_list.php script.
+		   </li><li>The mailing_list.php should now display the Session ID as well as the value of the Session AdminID and the Last Logged in date</li>
+		</ul>
+		<h3>Step 4 - Make changes to the contact form</h3>
+		<ul>
+		   <li>Add a file upload element to the form on the contact.php script. Upload the file to the server in a folder named "files" which is located at the root of the wp_eatery site.</li>
+           <li>Update the INSERT code from last week to ensure that the email address stored in the database is encrypted using the the password_hash() function. <strong>Remember that you will have to include the password.php script provided if you are not running php 5.5</strong></li>
+	       <li><strong>Please Note:</strong> This will require you to alter the emailaddress column in the mailinglist table. Research the ALTER and MODIFY MySql commands to change the emailaddress column to a VARCHAR(70)</li>
+	       <li>The mailing_list.php page should now display the stored hash value proving you have you encrypted the email in the database</li>
+		</ul>
+		<h2>Submission Requirements</h2>
+		<p>Please submit the lab in the following way:</p>
+		<ul>
+			<li>Create a ZIP file containing the entire wp_eatery website with all updated files. Name the zip file <strong>FinalLab_FirstnameLastname.zip</strong></li>
+			<li>In Blackboard, submit the ZIP file under Course Documents -&gt; Week 12 -&gt; Final Lab.</li>
+			<li>Refer to the Week 12 Lab Evaluation document.</li>
+		</ul>
+	
+<script type="text/javascript" src="./DownloadAttachment_files/MathML.js.download"></script><script type="text/javascript">document.addEventListener('DOMContentLoaded', function() { D2LMathML.DesktopInit('https://s.brightspace.com/lib/mathjax/2.6.1/MathJax.js?config=MML_HTMLorMML','https://s.brightspace.com/lib/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML'); });</script></body></html>
