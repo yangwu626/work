@@ -85,7 +85,6 @@
 					if(isset($_FILES['file'])){
 						$file_name = $_FILES['file']['name'];
 						$file_tmp = $_FILES['file']['tmp_name'];
-		
 						if (move_uploaded_file($file_tmp,"files/".$file_name)){
 						   echo "<h3> File upload Success </h3>";
 						}else{

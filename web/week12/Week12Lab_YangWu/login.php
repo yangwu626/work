@@ -1,6 +1,6 @@
 <?php
-    require_once('WebsiteUser.php');
     session_start();
+    require_once('WebsiteUser.php');
     // if(isset($_SESSION['websiteUser'])){
     //     if($_SESSION['websiteUser']->isAuthenticated()){
     //         //session_write_close();
@@ -22,10 +22,10 @@
                     $password = $_POST['password'];
                     $websiteUser->authenticate($username, $password);
                     if($websiteUser->isAuthenticated()){
-                        $_SESSION['websiteUser'] = $websiteUser;  
+                        $_SESSION['websiteUser'] = $websiteUser;
                         $_SESSION['Lastlogin'] = $websiteUser->getLastlogin();
                         $_SESSION['AdminID'] = $websiteUser->getAdminID();
-                        header("Location: ". $_SESSION['current_page']);
+                        header("Location: ". "mailing_list.php"); //$_SESSION['current_page']);
                         exit();
                     }
                 }

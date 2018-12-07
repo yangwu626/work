@@ -51,6 +51,9 @@ class customerDAO extends abstractDAO {
     public function getCustomer($emailAddress){
         $query = 'SELECT * FROM mailinglist WHERE emailAddress = ?';
         $stmt = $this->mysqli->prepare($query);
+        if (!$stmt) {
+            return false;
+        }
         $stmt->bind_param('s', $emailAddress);
         $stmt->execute();
         $result = $stmt->get_result();

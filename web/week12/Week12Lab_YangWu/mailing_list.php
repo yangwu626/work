@@ -1,13 +1,12 @@
+<?php include 'header.php' ?>
 <?php
-    session_start();
     if(!isset($_SESSION['websiteUser'])){
         $_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
         header("Location:login.php");
         exit();
-    } 
+    }
 ?>
 
-<?php include 'header.php' ?>
 <?php require_once('./dao/customerDAO.php'); ?>
 <?php require_once('PasswordHash.php'); ?>
 

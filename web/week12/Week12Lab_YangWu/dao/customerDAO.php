@@ -29,8 +29,10 @@ class customerDAO extends abstractDAO {
     public function getCustomers(){
         //The query method returns a mysqli_result object
         $result = $this->mysqli->query('SELECT * FROM mailinglist');
+        if (!$result) {
+            return false;
+        }
         $customers = Array();
-        
         if($result->num_rows >= 1){
             while($row = $result->fetch_assoc()){
                 //Create a new employee object, and add it to the array.
@@ -43,7 +45,6 @@ class customerDAO extends abstractDAO {
         $result->free();
         return false;
     }
-    
     /*
      * This is an example of how to use a prepared statement
      * with a select query.
@@ -51,6 +52,9 @@ class customerDAO extends abstractDAO {
     public function getCustomer($emailAddress){
         $query = 'SELECT * FROM mailinglist WHERE emailAddress = ?';
         $stmt = $this->mysqli->prepare($query);
+        if (!$stmt) {
+            return false;
+        }
         $stmt->bind_param('s', $emailAddress);
         $stmt->execute();
         $result = $stmt->get_result();

@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,6 +26,11 @@
                         <li><a href="menu.php">Menu</a></li>
                         <li><a href="contact.php">Contact</a></li>
                         <li><a href="mailing_list.php">List</a></li>
+                        <?php
+                             if(isset($_SESSION['websiteUser'])) {
+echo "<li><a href=\"logout.php\">Logout</a></li>";
+}
+                         ?>
                     </ul>
                 </div>
             </nav>
